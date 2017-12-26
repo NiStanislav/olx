@@ -38,7 +38,7 @@ public class UserBean {
 	}
 	
     public boolean getPasswordHash(String email, String password) throws NoSuchAlgorithmException {
-		Query q = entityManager.createQuery("SELECT z FROM UserEntity z WHERE z.email=:email");
+		Query q = entityManager.createQuery("FROM UserEntity p WHERE p.email=:email");
 		q.setParameter("email", email);
 		UserEntity u = (UserEntity)q.getSingleResult();
 		String userHash = HashText.sha1(password + u.getPasswordSalt());
@@ -52,6 +52,13 @@ public class UserBean {
     public UserDTO getUser(String email) throws NoSuchAlgorithmException {
  		Query q = entityManager.createQuery("SELECT z FROM UserEntity z WHERE z.email=:email");
  		q.setParameter("email", email);
+ 		UserEntity u = (UserEntity)q.getSingleResult();
+ 		return u.toDTO();
+     }
+    
+    public UserDTO getUserbyId(long id) throws NoSuchAlgorithmException {
+ 		Query q = entityManager.createQuery("SELECT z FROM UserEntity z WHERE z.id=:id");
+ 		q.setParameter("id", id);
  		UserEntity u = (UserEntity)q.getSingleResult();
  		return u.toDTO();
      }

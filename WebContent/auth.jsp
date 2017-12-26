@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Login</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<link rel ="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css">
 <script>
 $(document).ready(function(){
 	var frm = $('#login');
@@ -30,7 +33,7 @@ $(document).ready(function(){
             url: frm2.attr('action'),
             data: frm2.serialize(),
             success: function (data) {
-            		window.location.replace("http://localhost:8080/rest/home");
+            		window.location.replace("http://localhost:8080/rest/home/");
             },
 			error: function (error) {
 				alert('All fields are required');
@@ -52,27 +55,40 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">OLX.kz</a>
+<%
+    session=request.getSession(false);
+    if(session.getAttribute("email")!=null)
+    {
+        response.sendRedirect("http://localhost:8080/rest/home/");
+    }
+
+	%>
+
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<img class="logo" src="https://olxkz-static.akamaized.net/static/olxkz/packed/font/2f4f22766be42e5eac379976b5237b92ca.svg">
+		</a>
 	</nav>
 	<div class="container">
 		<div id="signinrow" class="row" style="padding-top:20px;">
+		
 			<div class="col">
 		    </div>
 		    <div class="col">
-		      <form id="login" method="POST" action="/rest/resources/auth/signIn">
+		      <form id="login" method="POST" action="/rest/resources/auth/signIn" class="form-signin">
+		      <h2 class="form-signin-heading">Please sign in</h2>
 			  <input type="hidden" value="/" name="requestURI" />
 			  <div class="form-group">
-			    <label for="email">Email address</label>
-			    <input type="email" required="required" class="form-control" id="email" placeholder="Enter email" name="email">
+			   <!--  <label for="email">Email address</label> -->
+			    <input type="email" required="required" class="form-control" id="email" placeholder="Email address" name="email">
 			  </div>
 			  <div class="form-group">
-			    <label for="password">Password</label>
+			  <!--   <label for="password">Password</label> -->
 			    <input type="password" required="required" class="form-control" id="password" placeholder="Password" name="password">
 			  </div>
-			  <button type="submit" class="btn btn-primary">Sign in</button>
+			  <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
 			  </form>
-			  <button id="signup" class="btn btn-secondary" style="margin-top:10px">Sign up</button>
+			  <button id="signup" class="btn btn-lg btn-secondary btn-block" style="margin:25px; max-width:300px;">Sign up</button>
 		    </div>
 		    <div class="col">
 		    </div>
@@ -112,8 +128,23 @@ $(document).ready(function(){
 		    </div>
 	  	</div>
 	</div>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<style>
+	img.logo{
+		height: 60px;
+    		width: 60px;
+    		margin: 20px;
+    		margin-top:40px;
+    		
+	}
+	nav{
+		max-height: 60px;
+	}
+	body{
+		padding: 0 !important;
+	}
+	
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </body>
 </html>

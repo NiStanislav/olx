@@ -37,11 +37,11 @@ public class PostService {
 	@Path("/create")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response create(@FormParam("title") String title, @FormParam("city") String city, 
-	@FormParam("state") String state,@FormParam("price") String price,@FormParam("desc") String description,@FormParam("image") String image,@Context HttpServletRequest req) throws NoSuchAlgorithmException, EntityNotFoundException{
-        long id = postBean.newPost(new PostEntity(title,city,state, image, req.getSession().getAttribute("email").toString(), price, description));
+	@FormParam("state") String state,@FormParam("price") int price,@FormParam("desc") String description,@FormParam("image") String image,@FormParam("category") String category,@Context HttpServletRequest req) throws NoSuchAlgorithmException, EntityNotFoundException{
+        long id = postBean.newPost(new PostEntity(title,category,city,state, image, req.getSession().getAttribute("email").toString(), price, description,req.getSession().getAttribute("phone").toString()));
         HttpSession session = req.getSession();
 		session.setAttribute("postId",id);
-		return Response.ok("Post has added sn").build();
+		return Response.ok().build();
 	}
 	
 	@GET
@@ -67,9 +67,9 @@ public class PostService {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<PostDTO> getSearch(String search,String order)
+	public ArrayList<PostDTO> getSearch(String search,String order,String query)
 	{
-		return postBean.getResults(order, search);
+		return postBean.getResults(order, search, query);
 	}
 	
 	

@@ -25,6 +25,9 @@ public class PostEntity {
 	 @Column(name = "city", nullable = false)
 	 private String city;
 	 
+	 @Column(name = "category", nullable = false)
+	 private String category;
+	 
 	 @Column(name = "state", nullable = false)
 	 private String state;
 	 
@@ -41,24 +44,29 @@ public class PostEntity {
 	 private String date;
 	 
 	 @Column(name = "price", nullable = false)
-	 private String price;
+	 private int price;
 	 
 	 @Column(name = "description", nullable = false)
 	 private String description;
+	 
+	 @Column(name = "phone", nullable = false)
+	 private String phone;
 	
-	 public PostEntity(String title, String city,String state, String image, String author, String price, String description) {
+	 public PostEntity(String title,String category,String city,String state, String image, String author, int price, String description,String phone) {
 	     this.title = title;
+	     this.category = category;
 	     this.city = city;
 	     this.state = state;
 	     this.image = image;
 	     this.author = author;
 	     this.price = price;
 	     this.description = description;
+	     this.phone = phone;
 	 }
 	 
 	 public PostEntity() {}
 	 
-	 public String getPrice() {
+	 public int getPrice() {
 	     return this.price;
 	 }
 	
@@ -114,8 +122,24 @@ public class PostEntity {
 	     this.description = description;
 	 }
 	 
+	 public String getCategory() {
+	     return this.category;
+	 }
+	
+	 public void setCategory(String category) {
+	     this.category = category;
+	 }
+	 
+	 public String getPhone() {
+	     return this.phone;
+	 }
+	
+	 public void setPhone(String phone) {
+	     this.phone = phone;
+	 }
+	 
 	 public PostDTO toDTO() {
-	 	PostDTO u = new PostDTO(id,title,city,state,image,author,price,description,views);
+	 	PostDTO u = new PostDTO(id,title,city,state,image,author,price,description,views,category,phone);
 		return u;
 	 } 
 

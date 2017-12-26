@@ -31,7 +31,6 @@ public class MailService{
         try {
             MimeMessage m = new MimeMessage(mailSession);
             Address[] to = new InternetAddress[] {new InternetAddress(event.getTo())};
- 
             m.setRecipients(Message.RecipientType.TO, to);
             m.setSubject(event.getSubject());
             m.setSentDate(new java.util.Date());

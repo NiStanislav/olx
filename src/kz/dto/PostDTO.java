@@ -10,10 +10,12 @@ public class PostDTO {
 	 private String author;
 	 private int views;
 	 private String date;
-	 private String price;
+	 private int price;
 	 private String description;
+	 private String category;
+	 private String phone;
 
-	 public PostDTO(long id,String title, String city,String state, String image, String author, String price, String description,int views) {
+	 public PostDTO(long id,String title, String city,String state, String image, String author, int price, String description,int views,String category,String phone) {
 		 this.id = id;
 	     this.title = title;
 	     this.city = city;
@@ -23,6 +25,8 @@ public class PostDTO {
 	     this.price = price;
 	     this.description = description;
 	     this.views = views;
+	     this.category = category;
+	     this.phone = phone;
 	 }
 
 	 public PostDTO(String title, String image, long id) {
@@ -32,7 +36,7 @@ public class PostDTO {
 	 }
 
 
-	 public String getPrice() {
+	 public int getPrice() {
 	     return this.price;
 	 }
 
@@ -86,5 +90,21 @@ public class PostDTO {
 
 	 public void setDescription(String description) {
 	     this.description = description;
+	 }
+	 
+	 public String getCategory() {
+	     return this.category;
+	 }
+	
+	 public void setCategory(String category) {
+	     this.category = category;
+	 }
+	 
+	 public String getPhone() {
+	     return this.phone;
+	 }
+	
+	 public void setPhone(String phone) {
+	     this.phone = phone;
 	 }
 }

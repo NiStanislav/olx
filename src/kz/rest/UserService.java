@@ -45,7 +45,8 @@ public class UserService{
 		}
 		HttpSession session = req.getSession();
 		session.setAttribute("email",email);
-		return Response.ok("User has logged in").build();
+		session.setAttribute("phone",userBean.getUser(email).getPhone());
+		return Response.ok().build();
 	}
 	
 	@POST
@@ -56,22 +57,10 @@ public class UserService{
 		userBean.signUp(name, surname, email, password, phone);
 		HttpSession session = req.getSession();
 		session.setAttribute("email",email);
-		return Response.ok("User has been registered").build();
+		session.setAttribute("phone",phone);
+		session.setAttribute("name",name+" "+surname);
+		return Response.ok().build();
 	}
 	
-	@GET
-	@Path("/signOut")
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response signOut(@Context HttpServletRequest req) throws ServletException { 
-		req.logout();
-		return Response.ok("User has logged out").build();
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public UserDTO getUser(String email) throws NoSuchAlgorithmException
-	{
-		return userBean.getUser(email);
-	}
 	
 }
